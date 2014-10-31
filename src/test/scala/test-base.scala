@@ -32,6 +32,7 @@ import com.rackspace.cloud.api.wadl.XSDVersion._
 import com.rackspace.cloud.api.wadl.RType._
 import com.rackspace.cloud.api.wadl.Converters._
 import com.rackspace.cloud.api.wadl.WADLNormalizer
+import com.rackspace.cloud.api.wadl.WADLProgramListingValidator
 
 class SchemaAsserter(xsdSource : URL, useSaxon : Boolean = false) {
   private val factory = {
@@ -89,7 +90,7 @@ trait XPathAssertions extends NamespaceContext {
       case xpe : XPathException => throw new TestFailedException("Error in XPath! ", xpe, 4)
       case tf  : TestFailedException => throw tf
       case unknown : Throwable => throw new TestFailedException ("Unkown XPath assert error! "+node, unknown, 4)
-    } 
+    }
   }
 
   //
@@ -183,7 +184,7 @@ trait TransformHandler {
   }
 }
 
-class BaseWADLSpec extends FeatureSpec with TransformHandler 
+class BaseWADLSpec extends FeatureSpec with TransformHandler
                                        with XPathAssertions
                                        with GivenWhenThen {
 
@@ -238,4 +239,11 @@ class BaseWADLSpec extends FeatureSpec with TransformHandler
     }
     super.scenario(specText, testTags:_*)(testCall)
   }
+}
+
+class BaseProgramListingSpec extends FeatureSpec with XPathAssertions
+                                       with GivenWhenThen {
+
+  val wadl = new WADLProgramListingValidator()
+
 }
