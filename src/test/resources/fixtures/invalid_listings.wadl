@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wadl:application xmlns:wadl="http://wadl.dev.java.net/2009/02" xmlns="http://docbook.org/ns/docbook" xmlns:rax="http://docs.rackspace.com/api" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsdxt="http://docs.rackspacecloud.com/xsd-ext/v1.0">
+  <wadl:grammars xmlns="http://wadl.dev.java.net/2009/02" xmlns:db="http://docbook.org/ns/docbook" />
+  <resources xmlns="http://wadl.dev.java.net/2009/02" xmlns:db="http://docbook.org/ns/docbook" xmlns:xsd="http://www.w3.org/2001/XMLSchema" base="https://test.api.openstack.com">
+    <resource path="a/b">
+      <resource path="c">
+        <method name="POST" rax:id="createNotification">
+          <request>
+            <representation mediaType="application/json" xml:lang="EN" element="csapi">
+              <wadl:doc xmlns="http://docbook.org/ns/docbook" title="Create webhook notification: JSON request">
+                <xsdxt:code>
+                  <programlisting language="json">
+                    {
+                      "label": "my webhook #1",
+                      "type": "webhook"
+                      "details": {
+                        "url": "https://systems.example.org/alert"
+                      }
+                    }
+                  </programlisting>
+                </xsdxt:code>
+              </wadl:doc>
+            </representation>
+            <representation mediaType="application/json" xml:lang="EN" element="csapi">
+              <wadl:doc xmlns="http://docbook.org/ns/docbook" title="Create webhook notification: XML request">
+                <xsdxt:code>
+                  <programlisting language="xml">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+                    &lt;notification&gt;
+                      &lt;label&gt;my webhook #1&lt;/label&gt;
+                      &lt;type&gt;webhook&lt;/type&gt;
+                      &lt;details&gt;
+                        &lt;url&gt;https://systems.example.org/alert&lt;/url&gt;
+                      &lt;details&gt;
+                    &lt;/notification&gt;</programlisting>
+                </xsdxt:code>
+              </wadl:doc>
+            </representation>
+          </request>
+        </method>
+      </resource>
+    </resource>
+  </resources>
+</wadl:application>
